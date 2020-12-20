@@ -2,10 +2,12 @@
         <script src="<?php echo base_url('assets/admin-temp/') ?>js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="<?php echo base_url('assets/admin-temp/') ?>js/scripts.js"></script>
         <script src="<?php echo base_url('assets/admin-temp/') ?>js/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="<?php echo base_url('assets/admin-temp/') ?>assets/demo/chart-area-demo.js"></script>
-        <script src="<?php echo base_url('assets/admin-temp/') ?>assets/demo/chart-bar-demo.js"></script>
+        <!-- <script src="<?php echo base_url('assets/admin-temp/') ?>assets/demo/chart-area-demo.js"></script>
+        <script src="<?php echo base_url('assets/admin-temp/') ?>assets/demo/chart-bar-demo.js"></script> -->
         <script src="<?php echo base_url('assets/admin-temp/') ?>js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="<?php echo base_url('assets/admin-temp/') ?>js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="<?php echo base_url('assets/admin-temp/') ?>assets/demo/datatables-demo.js"></script>
+        <!-- Plugin MNBTricks -->
+        <script src="<?php echo base_url(); ?>assets/js/plugin-mnbtricks/mnbtricks.js"></script>
     </body>
 </html>

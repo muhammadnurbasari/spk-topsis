@@ -48,13 +48,23 @@ class Manage extends CI_Controller {
 			if ($this->form_validation->run() == false) {
 				echo validation_errors();
 			} else {
-				$data = [
-					"username" => htmlspecialchars($username)
-				];
-
-				$this->Result_model->updatedata_by_id("users", $id, $this->audit_trails('edit', $data));
-
-				echo "1";
+				// pre-assesment
+				$this->db->where('username', $username);
+				$this->db->where('deleted_by', NULL);
+				$this->db->where('deleted_at', NULL);
+				$this->db->where('users_id !=', $id);
+				$pre_assesment = $this->Result_model->getdata_by_name('users', 'username', $username);
+				if($pre_assesment){
+					echo "username sudah terdaftar, silahkan gunakan nama yang lain";
+				} else {
+					$data = [
+						"username" => htmlspecialchars($username)
+					];
+	
+					$this->Result_model->updatedata_by_id("users", $id, $this->audit_trails('edit', $data));
+	
+					echo "1";
+				}
 			}
 		} elseif ($para == "add") {
 			$username = $this->input->post("username");
@@ -66,14 +76,23 @@ class Manage extends CI_Controller {
 			if ($this->form_validation->run() == false) {
 				echo validation_errors();
 			} else {
-				$data = [
-					"username" => htmlspecialchars($username),
-					"password" => password_hash($password, PASSWORD_DEFAULT)
-				];
-
-				$this->Result_model->add_data("users", $this->audit_trails('add', $data));
-
-				echo "1";
+				// pre-assesment
+				$this->db->where('username', $username);
+				$this->db->where('deleted_by', NULL);
+				$this->db->where('deleted_at', NULL);
+				$pre_assesment = $this->Result_model->getdata_by_name('users', 'username', $username);
+				if($pre_assesment){
+					echo "username sudah terdaftar, silahkan gunakan nama yang lain";
+				} else {
+					$data = [
+						"username" => htmlspecialchars($username),
+						"password" => password_hash($password, PASSWORD_DEFAULT)
+					];
+	
+					$this->Result_model->add_data("users", $this->audit_trails('add', $data));
+	
+					echo "1";
+				}
 			}
 		} elseif ($para == "delete") {
 			$id = $this->input->post("id");
