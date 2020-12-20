@@ -16,6 +16,7 @@
                         <div class="card-header">
                             <i class="fas fa-table"></i>
                             DataTable <?= $info_topbar; ?>
+                            <button class="btn btn-info btn-sm float-right" id="addButton" data-table="users">Tambah users </button>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
