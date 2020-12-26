@@ -41,9 +41,11 @@ class Manage extends CI_Controller {
 			$this->_templating($data, $page);
 		} elseif ($para == "edit") {
 			$username = $this->input->post("username");
+			$role = $this->input->post("role");
 			$id = $this->input->post("id");
 
 			$this->form_validation->set_rules("username", "Username", "required",["required" => "username harus diisi"]);
+			$this->form_validation->set_rules("role", "Role", "required",["required" => "role harus diisi"]);
 
 			if ($this->form_validation->run() == false) {
 				echo validation_errors();
@@ -58,7 +60,8 @@ class Manage extends CI_Controller {
 					echo "username sudah terdaftar, silahkan gunakan nama yang lain";
 				} else {
 					$data = [
-						"username" => htmlspecialchars($username)
+						"username" => htmlspecialchars($username),
+						"role" => htmlspecialchars($role)
 					];
 	
 					$this->Result_model->updatedata_by_id("users", $id, $this->audit_trails('edit', $data));
@@ -69,9 +72,11 @@ class Manage extends CI_Controller {
 		} elseif ($para == "add") {
 			$username = $this->input->post("username");
 			$password = $this->input->post("password");
+			$role = $this->input->post("role");
 
 			$this->form_validation->set_rules("username", "Username", "required",["required" => "username harus diisi"]);
 			$this->form_validation->set_rules("password", "Password", "required",["required" => "password harus diisi"]);
+			$this->form_validation->set_rules("role", "Role", "required",["required" => "role harus diisi"]);
 
 			if ($this->form_validation->run() == false) {
 				echo validation_errors();
@@ -86,7 +91,8 @@ class Manage extends CI_Controller {
 				} else {
 					$data = [
 						"username" => htmlspecialchars($username),
-						"password" => password_hash($password, PASSWORD_DEFAULT)
+						"password" => password_hash($password, PASSWORD_DEFAULT),
+						"role" => htmlspecialchars($role)
 					];
 	
 					$this->Result_model->add_data("users", $this->audit_trails('add', $data));
