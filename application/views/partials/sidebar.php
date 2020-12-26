@@ -55,7 +55,7 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Laporan
                 </a>
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="<?= base_url('manage/logout'); ?>">
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                     Logout
                 </a>

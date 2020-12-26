@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Page Title - SB Admin</title>
+        <title>Login - SB Admin</title>
         <link href="<?php echo base_url('assets/admin-temp/'); ?>css/styles.css" rel="stylesheet" />
 
         <script type="text/javascript">
@@ -22,7 +22,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                    <div class="card-header"><h3 class="text-center text-uppercase font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
                                         <form class="login">
                                         	<!-- alert -->
@@ -32,7 +32,7 @@
 											</div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="username">Username</label>
-                                                <input class="form-control py-4" name="username" id="username" type="text" placeholder="Enter username" />
+                                                <input autocomplete="off" class="form-control py-4" name="username" id="username" type="text" placeholder="Enter username" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="password">Password</label>
