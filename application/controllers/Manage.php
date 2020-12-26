@@ -102,6 +102,87 @@ class Manage extends CI_Controller {
 			echo "1";
 		}
 	}
+	
+	// criterias - manage criterias data
+	public function criterias($para='')
+	{
+		if ($para == '') {
+			$page = "criterias/index";
+			$data["info_topbar"] = "Manajemen Kriteria";
+			$data['criterias'] = $this->Result_model->getdata("criterias");
+			$this->_templating($data, $page);
+		} elseif ($para == "edit") {
+			$criterias_name = $this->input->post("criterias_name");
+			$criterias_attribute = $this->input->post("criterias_attribute");
+			$criterias_crips = $this->input->post("criterias_crips");
+			$id = $this->input->post("id");
+			
+			$this->form_validation->set_rules("criterias_name", "criterias_name", "required",["required" => "Nama Kriteria harus diisi"]);
+			$this->form_validation->set_rules("criterias_attribute", "Criterias_attribute", "required",["required" => "Attribute Kriteria harus diisi"]);
+			$this->form_validation->set_rules("criterias_crips", "Criterias_crips", "required",["required" => "Kepentingan Kriteria harus diisi"]);
+
+			if ($this->form_validation->run() == false) {
+				echo validation_errors();
+			} else {
+				// pre-assesment
+				$this->db->where('criterias_name', $criterias_name);
+				$this->db->where('deleted_by', NULL);
+				$this->db->where('deleted_at', NULL);
+				$this->db->where('criterias_id !=', $id);
+				$pre_assesment = $this->Result_model->getdata_by_name('criterias', 'criterias_name', $criterias_name);
+				if($pre_assesment){
+					echo "nama kriteria sudah terdaftar, silahkan gunakan nama yang lain";
+				} else {
+					$data = [
+						"criterias_name" => htmlspecialchars($criterias_name),
+						"criterias_attribute" => htmlspecialchars($criterias_attribute),
+						"criterias_crips" => htmlspecialchars($criterias_crips)
+					];
+					
+					$this->Result_model->updatedata_by_id("criterias", $id, $this->audit_trails('edit', $data));
+					
+					echo "1";
+				}
+			}
+		} elseif ($para == "add") {
+			$criterias_name = $this->input->post("criterias_name");
+			$criterias_attribute = $this->input->post("criterias_attribute");
+			$criterias_crips = $this->input->post("criterias_crips");
+			
+			$this->form_validation->set_rules("criterias_name", "criterias_name", "required",["required" => "Nama Kriteria harus diisi"]);
+			$this->form_validation->set_rules("criterias_attribute", "Criterias_attribute", "required",["required" => "Attribute Kriteria harus diisi"]);
+			$this->form_validation->set_rules("criterias_crips", "Criterias_crips", "required",["required" => "Kepentingan Kriteria harus diisi"]);
+
+			if ($this->form_validation->run() == false) {
+				echo validation_errors();
+			} else {
+				// pre-assesment
+				$this->db->where('criterias_name', $criterias_name);
+				$this->db->where('deleted_by', NULL);
+				$this->db->where('deleted_at', NULL);
+				$pre_assesment = $this->Result_model->getdata_by_name('criterias', 'criterias_name', $criterias_name);
+				if($pre_assesment){
+					echo "nama kriteria sudah terdaftar, silahkan gunakan nama yang lain";
+				} else {
+					$data = [
+						"criterias_name" => htmlspecialchars($criterias_name),
+						"criterias_attribute" => htmlspecialchars($criterias_attribute),
+						"criterias_crips" => htmlspecialchars($criterias_crips)
+					];
+	
+					$this->Result_model->add_data("criterias", $this->audit_trails('add', $data));
+	
+					echo "1";
+				}
+			}
+		} elseif ($para == "delete") {
+			$id = $this->input->post("id");
+
+			$this->Result_model->updatedata_by_id("criterias", $id, $this->audit_trails('delete', ''));
+
+			echo "1";
+		}
+	}
 
 	// _templating - function to view and send data
 	function _templating($data, $page)

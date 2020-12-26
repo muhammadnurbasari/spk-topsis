@@ -16,7 +16,7 @@
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="<?php echo base_url('manage/users') ?>">Users</a>
-                        <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                        <a class="nav-link" href="<?php echo base_url('manage/criterias') ?>">Kriteria</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
